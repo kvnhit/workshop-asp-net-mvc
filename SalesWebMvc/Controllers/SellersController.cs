@@ -3,14 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SalesWebMvc.Services;
 
 namespace SalesWebMvc.Controllers
 {
     public class SellersController : Controller
     {
+        private readonly SellerService _serllerService;
+        public SellersController(SellerService sellerService)
+        {
+            _serllerService = sellerService;
+        }
         public IActionResult Index()
         {
-            return View();
-        }
+            var list = _serllerService.FindAll();
+            return View(list);
+        }        
     }
 }
